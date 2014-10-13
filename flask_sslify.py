@@ -38,7 +38,8 @@ class SSLify(object):
         criteria = [
             request.is_secure,
             current_app.debug,
-            request.headers.get('X-Forwarded-Proto', 'http') == 'https'
+            request.headers.get('X-Forwarded-Proto', 'http') == 'https',
+            request.headers.get("User-Agent", "") == "ELB-HealthChecker/1.0"
         ]
 
         if not any(criteria):
